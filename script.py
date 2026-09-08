@@ -44,3 +44,18 @@
 #                     print("Only letters  are allowed")
 #      return name
 # print(get_name())
+
+
+
+# def test(x):
+#     print("Before",x)
+#     x += 1
+#     print("inside",x)
+
+# x=100
+# test(x)
+# print("outside",x)
+
+l = [{"name":4,"Age":24},{"name":4,"Age":23},]
+l.sort(key = lambda i: i ["Age"])
+print(l)

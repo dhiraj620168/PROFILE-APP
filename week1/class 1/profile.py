@@ -60,7 +60,7 @@ def get_category(age):
 
 
 
-def create_profile():
+def create_profile(profile_id):
       name = get_name()
       age = get_age()
       city = get_city()
@@ -68,11 +68,13 @@ def create_profile():
       category = get_category(age)
 
       profile_data = {
+            "User ID":profile_id,
             "Name":name,
             "Age":age,
             "City":city,
             "Skill":skill,
             "category":category
+
       }
       print("Profile Created Successfully...")
       return profile_data
@@ -80,7 +82,8 @@ def create_profile():
 def show_profile(profile_data):
       pattern = '=' * 40
       space = ' ' * 15
-      print(pattern, space + "MY PROFILE" + space, pattern, "Name : " + profile_data['Name'], "Age : " + str(profile_data['Age']), "City : " + profile_data['City'], "Skill : " + profile_data['Skill'],"Category: "+ profile_data['category'],  sep="\n")
+      for profile_index,profile in enumerate(profile_data):
+          print(pattern, space + "PROFILE : " + str(profile_index + 1) + space, pattern,"User ID :" + str(profile["User ID"]),"Name : " + profile['Name'], "Age : " + str(profile['Age']), "City : " + profile['City'], "Skill : " + profile['Skill'],"Category: "+ profile['category'],  sep="\n")
 
 def delete(profile_data):
       if profile_data is not None:
@@ -126,30 +129,39 @@ def update(profile_data):
 
 
 def main():
-      print("="*40 ,"PROFILE APP","="*40)
-      profile_data = None
+      print("="*20 ,"PROFILE APP","="*20)
+      profile_data = []
+      profile_id = None
+      profile_id = 100
       while True:
             print("1. Create Profile","2. veiw Profile","3. Update Profile","4. Delete Profile","5. Exit",sep = "\n")
             choice = input("Enter your choice: ")
             if choice == "1":
-                  profile_data = create_profile()
+                  profile_id += 1
+                  profile_data.append(create_profile(profile_id))
+                  print()
             elif choice == "2":
-                  if profile_data is not None:
-                     show_profile(profile_data)
+                  if profile_data:
+                        show_profile(profile_data)
+                        print()
+                  #    show_profile(profile_data[-1])  # Show the most recent profile
                   else:
-                     print("Profile Not Found.....Please Create profile First..")
+                     print("Profile Not Found.....Please Create profile First..\n")
             elif choice == "3":
                   update(profile_data)
 
             elif choice == "4":
                   profile_data = delete(profile_data)
+                  print()
 
             elif choice == "5":
                   print("Good.. Bye...!")
                   break
             else:
                   print("Enter a valid Input.... Thank You...!")
-                  
+                  print()
                  
-                  
-main()
+if __name__ == "__main__":
+      main()                
+
+    
